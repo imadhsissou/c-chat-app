@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 	prep.ai_family = AF_INET;     // use IPv4
 	prep.ai_socktype = SOCK_STREAM; // TCP stream sockets
 
-	if ((err_status = getaddrinfo("127.0.0.1", PORT, &prep, &results)) != 0) {
+	if ((err_status = getaddrinfo(NULL, PORT, &prep, &results)) != 0) {
 		fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(err_status));
 		exit(1);
 	}

@@ -25,26 +25,26 @@ int main(int argc, char** argv) {
 	int err_status;
 	int socketfd;
 	struct addrinfo prep_client, *results_client;
-	char* PORT = argv[2];
+	char* PORT = argv[3];
 
 	memset(&prep_client, 0, sizeof prep_client); // make sure the struct is empty
 	prep_client.ai_family = AF_INET;     // use IPv4
 	prep_client.ai_socktype = SOCK_STREAM; // TCP stream sockets
 
-	if ((err_status = getaddrinfo("127.0.0.1", PORT, &prep_client, &results_client)) != 0) {
+	if ((err_status = getaddrinfo(argv[2], PORT, &prep_client, &results_client)) != 0) {
 		fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(err_status));
 		exit(1);
 	}
 
 	socketfd = socket(results_client-> ai_family, results_client-> ai_socktype, results_client->ai_protocol);
-	printf("Trying 127.0.0.1 ...\n");
+	printf("Trying %s ...\n",argv[3]);
 	err_status = connect(socketfd,results_client->ai_addr, results_client->ai_addrlen);
 
 	if( err_status == -1) {
 		fprintf(stderr, "connect() error: %s\n", gai_strerror(errno));
 		exit(1);
 	} else {
-		printf("Connected to 127.0.0.1\n");
+		printf("Connected to %s\n",argv[2]);
 		char buffer[BUFFER_SIZE] = {}; // works fine !
 		char username[8] = {};
 
