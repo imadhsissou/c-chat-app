@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 	}
 
 	socketfd = socket(results_client-> ai_family, results_client-> ai_socktype, results_client->ai_protocol);
-	printf("Trying %s ...\n",argv[3]);
+	printf("Trying %s ...\n",argv[2]);
 	err_status = connect(socketfd,results_client->ai_addr, results_client->ai_addrlen);
 
 	if( err_status == -1) {
